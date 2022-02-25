@@ -1,0 +1,31 @@
+<center>
+<body bgcolor="#26428b">
+  <font face="arial" color="white">
+    <b>Synchronize Account Across Sheets</b><br><br>
+    <img src="https://drive.google.com/uc?export=view&id=1_wJTO9N_hub5as60t4NI4vCyPsLfm7gf" />
+    <br><br>
+    <!-- Create input fields to accept values from the user -->
+    Account:<br>
+    <select id="Named Ranges">
+    <? for (let i in namedRangesDPDWN) { ?>
+      <option value="<?=namedRangesDPDWN[i]?>"><?=namedRangesDPDWN[i]?></option>
+    <? } ?>
+    </select>
+    <br><br>
+
+  <div>
+    <button type="submit"id="submit-form" onclick="processInput()">Synchronize</button>
+  </div>
+  <script>
+    function processInput(){
+      var account = document.getElementById("Named Ranges").value;
+
+      google.script.run.withSuccessHandler(success).synchronizeAccounts(account);
+      
+    }
+    
+    function success(){
+      alert("Account Synced Successfully");
+      google.script.host.close()
+    }
+  </script>
